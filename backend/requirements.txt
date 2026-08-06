@@ -1,0 +1,13 @@
+# ── Web Framework ─────────────────────────────────────────────
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9      # required for FastAPI file uploads
+aiofiles>=23.2.1             # async file I/O helpers
+
+# ── PDF Processing ────────────────────────────────────────────
+pdf2docx>=0.5.8              # PDF → Word (.docx) conversion
+PyMuPDF>=1.24.0              # PDF → Images (also a pdf2docx dependency)
+                             # No external system deps (e.g. poppler) needed!
+
+# ── Image Processing ──────────────────────────────────────────
+Pillow>=10.4.0               # Image format conversion & optimization
