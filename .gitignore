@@ -1,0 +1,162 @@
+# ═══════════════════════════════════════════════════════════════
+#  .gitignore — SecureConvert
+#  Covers: Python, Node.js, Rust/Tauri, PyInstaller, IDEs, OS
+# ═══════════════════════════════════════════════════════════════
+
+
+# ── Python ───────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+.eggs/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+MANIFEST
+
+# PyInstaller output
+*.spec.bak
+/backend/dist/
+/backend/build/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+nosetests.xml
+coverage.xml
+*.cover
+
+# mypy / pyright type checker
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+.pyre/
+
+
+# ── Environment Variables ─────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.local
+
+
+# ── Node.js / npm ─────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnp
+.pnp.js
+.yarn/install-state.gz
+
+
+# ── Vite / React build output ─────────────────────────────────────
+/frontend/dist/
+/frontend/dist-ssr/
+/frontend/.vite/
+*.local
+
+
+# ── Rust / Cargo ──────────────────────────────────────────────────
+/frontend/src-tauri/target/
+
+# Cargo.lock should be committed for binary crates (like Tauri apps)
+# so we do NOT ignore it here.
+
+
+# ── Tauri ─────────────────────────────────────────────────────────
+# Tauri build output (Windows .msi, macOS .dmg, Linux .AppImage)
+/frontend/src-tauri/target/
+WixTools/
+
+
+# ── IDE & Editor ──────────────────────────────────────────────────
+# VS Code
+.vscode/*
+!.vscode/extensions.json   # keep recommended extensions list
+!.vscode/settings.json     # keep shared project settings
+
+# JetBrains (PyCharm, WebStorm, etc.)
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim / Neovim
+*.swp
+*.swo
+*~
+Session.vim
+.netrwhist
+
+# Emacs
+*#
+.#*
+
+
+# ── Operating System ──────────────────────────────────────────────
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+Icon
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+
+
+# ── Logs ──────────────────────────────────────────────────────────
+logs/
+*.log
+*.log.*
+
+
+# ── Temporary / misc ──────────────────────────────────────────────
+tmp/
+temp/
+.cache/
+*.bak
+*.tmp
+*.orig
