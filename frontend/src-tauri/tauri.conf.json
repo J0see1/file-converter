@@ -13,10 +13,10 @@
     "windows": [
       {
         "title": "SecureConvert",
-        "width": 640,
-        "height": 720,
-        "minWidth": 560,
-        "minHeight": 620,
+        "width": 900,
+        "height": 660,
+        "minWidth": 800,
+        "minHeight": 580,
         "resizable": true,
         "center": true
       }
