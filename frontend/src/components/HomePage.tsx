@@ -27,7 +27,7 @@ export default function HomePage({ onSelectWord, onSelectImage }: HomePageProps)
           onClick={onSelectWord}
         >
           <img src={wordIcon} alt="Word" className="xp-card-icon" />
-          <span className="xp-card-title">.pdf to .docx</span>
+          <span className="xp-card-title">PDF to DOCs</span>
           <span className="xp-card-desc">
             Convert pdf file into editable docs file
           </span>
@@ -40,7 +40,7 @@ export default function HomePage({ onSelectWord, onSelectImage }: HomePageProps)
           onClick={onSelectImage}
         >
           <img src={jpegIcon} alt="Images" className="xp-card-icon" />
-          <span className="xp-card-title">.pdf to images</span>
+          <span className="xp-card-title">PDF to Images</span>
           <span className="xp-card-desc">
             Convert pdf file into various images files
           </span>

@@ -1,14 +1,29 @@
 import { useState, useEffect } from 'react';
 import bgImage from './assets/background.png';
 import HomePage from './components/HomePage';
+import ConversionPage from './components/ConversionPage';
 import Taskbar from './components/Taskbar';
 import { checkHealth } from './services/api';
 import './index.css';
 
+type Page = 'home' | 'word' | 'image';
+
+const WINDOW_TITLE: Record<Page, string> = {
+  home:  'Home',
+  word:  'PDF to DOCs',
+  image: 'PDF to Images',
+};
+
+const TASKBAR_LABEL: Record<Page, string> = {
+  home:  'Home',
+  word:  'PDF to DOCs',
+  image: 'PDF to Images',
+};
+
 export default function App() {
+  const [page, setPage]                   = useState<Page>('home');
   const [backendOnline, setBackendOnline] = useState(false);
 
-  // Poll backend health every 5 s
   useEffect(() => {
     let cancelled = false;
     async function poll() {
@@ -21,20 +36,26 @@ export default function App() {
   }, []);
 
   return (
-    // xp-root: flex column — desktop fills top, taskbar pinned at bottom
     <div className="xp-root">
-
-      {/* ── Desktop area with pixel-art background ── */}
       <div
         className="xp-desktop"
         style={{ backgroundImage: `url(${bgImage})` }}
       >
-        {/* XP Window */}
         <div className="xp-window">
 
-          {/* Title bar */}
+          {/* ── Title bar — back arrow lives here on sub-pages ── */}
           <div className="xp-titlebar">
-            <span className="xp-title-text">Home</span>
+            {page !== 'home' && (
+              <button
+                className="xp-titlebar-back"
+                onClick={() => setPage('home')}
+                aria-label="Back to Home"
+                title="Back to Home"
+              >
+                ←
+              </button>
+            )}
+            <span className="xp-title-text">{WINDOW_TITLE[page]}</span>
             <div className="xp-status" role="status">
               <span>{backendOnline ? 'ready' : 'offline'}</span>
               <span
@@ -44,20 +65,23 @@ export default function App() {
             </div>
           </div>
 
-          {/* Page content */}
+          {/* ── Page content ── */}
           <div className="xp-content">
-            <HomePage
-              onSelectWord={() => alert('PDF → Word — coming soon!')}
-              onSelectImage={() => alert('PDF → Images — coming soon!')}
-            />
+            {page === 'home' && (
+              <HomePage
+                onSelectWord={() => setPage('word')}
+                onSelectImage={() => setPage('image')}
+              />
+            )}
+            {(page === 'word' || page === 'image') && (
+              <ConversionPage type={page} backendOnline={backendOnline} />
+            )}
           </div>
 
         </div>
       </div>
 
-      {/* ── Taskbar pinned at the bottom ── */}
-      <Taskbar activePage="Home" />
-
+      <Taskbar activePage={TASKBAR_LABEL[page]} />
     </div>
   );
 }

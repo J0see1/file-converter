@@ -1,6 +1,6 @@
 /* ─── Fonts ───────────────────────────────────────────────────
-   Heading : Jersey 15  (loaded via index.html Google Fonts link)
-   Body    : Tahoma     (Windows system font — no download needed)
+   Heading : Jersey 15  
+   Body    : Tahoma     
  ─────────────────────────────────────────────────────────────── */
 
 /* ─── Reset ───────────────────────────────────────────────────── */
@@ -19,12 +19,12 @@ body {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;   /* desktop on top, taskbar pinned at bottom */
+  flex-direction: column;  
 }
 
 /* ─── Desktop (full-screen background) ───────────────────────── */
 .xp-desktop {
-  flex: 1;                      /* takes all space above the taskbar */
+  flex: 1;                     
   background-size: 100% 100%;
   background-position: center center;
   background-repeat: no-repeat;
@@ -121,7 +121,24 @@ body {
   font-weight: bold;
   color: #ffffff;
   letter-spacing: 0.02em;
+  flex: 1;   /* push status to the right */
 }
+
+/* Back arrow button inside the title bar (shown on sub-pages) */
+.xp-titlebar-back {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0 8px 0 0;
+  line-height: 1;
+  opacity: 0.85;
+  flex-shrink: 0;
+}
+.xp-titlebar-back:hover  { opacity: 1; }
+.xp-titlebar-back:active { opacity: 0.7; }
 
 .xp-status {
   display: flex;
@@ -213,10 +230,10 @@ body {
 /* ═══════════════════════════════════════════════════════════════
    CONVERSION PAGE
 ═══════════════════════════════════════════════════════════════ */
-.conv-page {
+.conv-page-content {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 
 .xp-back-btn {
@@ -231,6 +248,146 @@ body {
   width: fit-content;
 }
 .xp-back-btn:hover { color: #0000ff; }
+
+/* ── New: dashed drop zone (conversion page) ── */
+.conv-dropzone {
+  width: 100%;
+  min-height: 190px;
+  border: 2px dashed #888;
+  background: #f0ede4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.1s, border-color 0.1s;
+  padding: 20px;
+}
+.conv-dropzone:hover    { background: #eae7de; border-color: #555; }
+.conv-dropzone.dragging { background: #e0e0ff; border-color: #0000cc; border-style: solid; }
+
+.conv-drop-title {
+  font-family: 'Jersey 15', monospace;
+  font-size: 22px;
+  color: #1a1a1a;
+}
+
+.conv-drop-sub {
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px;
+  color: #666;
+}
+
+/* ── File list ── */
+.conv-files-section { display: flex; flex-direction: column; gap: 5px; }
+
+.conv-files-label {
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px;
+  color: #1a1a1a;
+}
+
+.conv-file-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px dashed #888;
+  padding: 8px 10px;
+  background: #f0ede4;
+}
+
+.conv-file-thumb {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(180deg, #d8d4cc 0%, #c0bbb0 100%);
+  border: 1px solid #aaa;
+  flex-shrink: 0;
+}
+
+.conv-file-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+}
+
+.conv-file-name {
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px;
+  color: #1a1a1a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conv-file-size {
+  font-family: 'Tahoma', sans-serif;
+  font-size: 10px;
+  color: #666;
+}
+
+.conv-file-track {
+  height: 7px;
+  background: #e0ddd5;
+  border: 1px solid #aaa;
+  overflow: hidden;
+}
+
+.conv-file-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #808080 0%, #a0a0a0 100%);
+  transition: width 0.06s linear;
+}
+.conv-file-fill.done {
+  background: linear-gradient(90deg, #3a9a1a 0%, #56c256 100%);
+}
+
+.conv-file-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+  flex-shrink: 0;
+  padding: 4px;
+  line-height: 1;
+}
+.conv-file-delete:hover { color: #cc0000; }
+
+/* ── Success banner ── */
+.conv-success {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f0fff0;
+  border: 1px solid #0a7a0a;
+  padding: 7px 12px;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px;
+  color: #0a5a0a;
+}
+
+/* ── Convert File button (full-width, dashed border) ── */
+.conv-convert-btn {
+  width: 100%;
+  padding: 13px 20px;
+  background: #f0ede4;
+  border: 2px dashed #888;
+  font-family: 'Jersey 15', monospace;
+  font-size: 20px;
+  color: #1a1a1a;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: background 0.1s, border-color 0.1s;
+  margin-top: 2px;
+}
+.conv-convert-btn:hover:not(:disabled) { background: #eae7de; border-color: #555; }
+.conv-convert-btn:active:not(:disabled) { background: #e0ddd4; }
+.conv-convert-btn:disabled { color: #1a1a1a; cursor: not-allowed; opacity: 0.6; }
+
 
 /* ─── Drop Zone ───────────────────────────────────────────────── */
 .xp-dropzone {
