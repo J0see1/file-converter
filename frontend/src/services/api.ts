@@ -5,6 +5,10 @@
 
 const BASE_URL = 'http://127.0.0.1:8000';
 
+// Native Tauri plugins
+import { save } from '@tauri-apps/plugin-dialog';
+import { writeFile } from '@tauri-apps/plugin-fs';
+
 export type ConversionType = 'word' | 'image';
 export type ImageFormat = 'png' | 'jpeg' | 'webp';
 
@@ -55,12 +59,33 @@ export async function convertPdfToImage(file: File, format: ImageFormat): Promis
 }
 
 /** Trigger a native file download from a Blob. Works in Tauri's webview. */
-export function downloadBlob(blob: Blob, filename: string): void {
+export async function downloadBlob(blob: Blob, filename: string): Promise<void> {
+  // 1. Check if we are running inside the Tauri Desktop App
+  // @ts-expect-error - Tauri injects this global
+  if (window.__TAURI_INTERNALS__) {
+    try {
+      // Prompt user for a save location
+      const filePath = await save({ defaultPath: filename });
+      if (!filePath) return; // User canceled
+
+      // Convert Blob to byte array and write natively
+      const buffer = await blob.arrayBuffer();
+      const uint8Array = new Uint8Array(buffer);
+      await writeFile(filePath, uint8Array);
+      return;
+    } catch (err) {
+      console.error("Tauri native save failed, falling back to web download", err);
+    }
+  }
+
+  // 2. Fallback for the web browser (npm run dev)
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement('a');
   anchor.href = url;
   anchor.download = filename;
+  document.body.appendChild(anchor);
   anchor.click();
+  document.body.removeChild(anchor);
   // Clean up the object URL after a short delay
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }

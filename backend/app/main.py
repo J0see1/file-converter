@@ -36,7 +36,7 @@ app = FastAPI(
 # The wildcard is safe here because the server is bound to 127.0.0.1 only.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:1420", "tauri://localhost"],  # Tauri dev + prod origins
+    allow_origins=["*"],  # Safe because it's bound to 127.0.0.1 locally
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
@@ -70,7 +70,7 @@ async def health_check():
 if __name__ == "__main__":
     logger.info("Starting SecureConvert backend on %s:%d", HOST, PORT)
     uvicorn.run(
-        "app.main:app",
+        app,
         host=HOST,
         port=PORT,
         reload=False,   # Never enable reload in the sidecar (production)

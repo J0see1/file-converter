@@ -28,6 +28,7 @@ share/python-wheels/
 MANIFEST
 
 # PyInstaller output
+*.spec
 *.spec.bak
 /backend/dist/
 /backend/build/
